@@ -1,14 +1,15 @@
-class Solution(object):
-    def pivotIndex(self, nums):
-        n=len(nums)
-        if sum(nums[1:])==0:return 0
-        for i in range(1,n-1):
-            if sum(nums[:i])==sum(nums[i+1:]):
-                return index(i)
-        if sum(nums[:n-1])==0:return n-1
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+    
+        total=0
+        for n in nums:
+            total+=n
+        total_left=0
+        for i in range(len(nums)):
+            if total_left==(total-nums[i]-total_left):
+                return i
+            total_left+=nums[i]
         return -1
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+            
+            
         
