@@ -1,32 +1,24 @@
-class Solution(object):
-    def isIsomorphic(self, s, t):
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
         
+        mapchar={}
+        mapped=set()
         
-        if s==None or t==None:
-            return False
-        elif s=="" and t=="":
-            return True
-        else:
-            lookup={}
-            
-            for i in range(len(s)):
-                k=s[i]
-                v=t[i]
+        n=len(s)
+        
+        for i in range(n):
+            if s[i] in mapchar:
+                if mapchar[s[i]]!=t[i]:
+                    return False
                 
-                if k in lookup:
-                    if lookup[k] != v:
-                        return False
-                else:
-                    if v in lookup.values():
-                        return False
-                    lookup[k]=v
-            return True
-                    
-                 
+            else:
+                if t[i] in mapped:
+                    return False
         
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
+                mapchar[s[i]]=t[i]
+                mapped.add(t[i])
+        return True
+                
+            
+        
         
