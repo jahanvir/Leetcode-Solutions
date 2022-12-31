@@ -1,24 +1,22 @@
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        
-        mapchar={}
-        mapped=set()
-        
-        n=len(s)
-        
-        for i in range(n):
-            if s[i] in mapchar:
-                if mapchar[s[i]]!=t[i]:
+        counts={}
+        countt={}
+        mapper={}
+
+        for i in range(len(s)):
+            if s[i] in mapper:
+                if mapper[s[i]] != t[i]:
                     return False
-                
+                counts[s[i]]+=1
+                countt[t[i]]+=1
             else:
-                if t[i] in mapped:
+                if s[i] not in counts and t[i] not in countt:
+                    counts[s[i]]=1
+                    countt[t[i]]=1
+                else:
                     return False
-        
-                mapchar[s[i]]=t[i]
-                mapped.add(t[i])
+            mapper[s[i]]=t[i]
+
+
         return True
-                
-            
-        
-        
