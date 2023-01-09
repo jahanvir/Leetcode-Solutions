@@ -5,19 +5,30 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def traverse(self,root,ans):
-        if root==None:
-            return
-        ans.append(root.val)
-        self.traverse(root.left,ans)
-        self.traverse(root.right,ans)
-        
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         ans=[]
-        self.traverse(root,ans)
-        return ans
-        
-    
+        curr=root
 
-    
+        while curr:
+            if curr.left:
+                last=curr.left
+                while last.right and last.right != curr:
+                    last=last.right
+                
+                if last.right:
+                    last.right=None
+                    curr=curr.right
+                else:
+                    last.right=curr
+                    ans.append(curr.val)
+                    curr=curr.left
+            else:
+                ans.append(curr.val)
+                curr=curr.right
+        return ans
+
+                    
+
+
+
         
