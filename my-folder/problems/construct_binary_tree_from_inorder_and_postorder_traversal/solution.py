@@ -5,44 +5,22 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-
-    
-    
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        
-        n=len(postorder)
-        #mapper for node to index for o(1)
-        nodeMap={}
-        for i in range(n):
-            nodeMap[inorder[i]]=i
 
+        indexMap={val:i for i, val in enumerate(inorder)}
 
-        
-        def solve(inorder,postorder,Start,End,nodeMap):
-            if Start>=End:
-                if inorder==[] or Start>End:
-                    return None
+        def build(inStart,inEnd,postStart,postEnd):
+
+            if inStart>inEnd:
+                return None
                 
-                node=postorder[self.pindex]
-                self.pindex-=1
-                return TreeNode(inorder[Start])
-            else:
-                if self.pindex>=0:
-                    node=postorder[self.pindex]
-                    self.pindex-=1
-            
-            root=TreeNode(node)
-            position=nodeMap[node]
-            
-            root.right=solve(inorder,postorder,position+1,End,nodeMap)
-            root.left=solve(inorder,postorder,Start,position-1,nodeMap)
-            
+            rootVal=postorder[postEnd]
+            rootValIndex=indexMap[rootVal]
+            leftSize=rootValIndex-inStart
+
+            root=TreeNode(rootVal)
+            root.left=build(inStart,rootValIndex-1,postStart,postStart+leftSize-1)
+            root.right=build(rootValIndex+1,inEnd,postStart+leftSize,postEnd-1)
             return root
-        
-        #solve(inorder,postorder,inorderstart,inorderend,size,nodeMap)
-        self.pindex=len(postorder)-1
-        root=solve(inorder,postorder,0,n-1,nodeMap)
-        return root
-    
-        
-    
+
+        return build(0,len(inorder)-1,0,len(postorder)-1)
