@@ -1,14 +1,19 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+
+        mapper = {'(':')', '[':']','{':'}'}
+        keys=list(mapper.keys())
         stack=[]
-        openb=('(','{','[')
-        closeb=(')','}',']')
-        
-        for i,b in enumerate(s):
-            if b in openb:
-                stack.append(b)
-            elif not stack or openb.index(stack.pop())!=closeb.index(b):
-                return False
-        return not stack
+        for c in s:
+            if c in keys:
+                stack.append(c)
+            else:
+                if not stack:
+                    return False
+                if mapper[stack.pop()] != c:
+                    return False
                 
-        
+        if stack:
+            return False
+        return True
+
