@@ -1,15 +1,12 @@
 class Solution:
     def average(self, salary: List[int]) -> float:
-        maximum=0
-        minimum=100000
+        maxSal=0
+        minSal=salary[0]
         total=0
-        n=len(salary)-2
         for s in salary:
+            if s>maxSal:
+                maxSal=s
+            if s<minSal:
+                minSal=s
             total+=s
-            if s>maximum:
-                maximum=s
-            if s<minimum:
-                minimum=s
-        return (total-minimum-maximum)/n
-            
-        
+        return (total - minSal- maxSal)/(len(salary)-2)
