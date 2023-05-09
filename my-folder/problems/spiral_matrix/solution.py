@@ -1,41 +1,40 @@
-class Solution(object):
-    def spiralOrder(self, matrix):
-        #no of rows
-        m=len(matrix)
-        
-        #columns
-        n=len(matrix[0])
-        
-        #start row
-        k=0
-        
-        #start col
-        l=0
-        
-        spiral=[]
-        
-        while k<m and l<n:
-            for i in range(l,n):
-                spiral.append(matrix[k][i])
-            k+=1
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        rows=len(matrix)
+        cols=len(matrix[0])
+
+        r1=0
+        r2=rows-1
+
+        c1=0
+        c2=cols-1
+
+        ans=[]
+
+        while len(ans)< rows * cols:
+            j=c1
+            while j<=c2 and len(ans)<rows*cols:
+                ans.append(matrix[r1][j])
+                j+=1
+
+            i=r1+1
+            while i<=r2-1 and len(ans)<rows*cols:
+                ans.append(matrix[i][c2])
+                i+=1
             
-            for i in range(k,m):
-                spiral.append(matrix[i][n-1])
-            n-=1
+            j=c2
+            while j>=c1 and len(ans)<rows*cols:
+                ans.append(matrix[r2][j])
+                j-=1
             
-            if k<m:
-                for i in range(n-1,l-1,-1):
-                    spiral.append(matrix[m-1][i])
-                m-=1
-            if l<n:
-                for i in range(m-1,k-1,-1):
-                    spiral.append(matrix[i][l])
-                l+=1
-        return spiral
+            i=r2-1
+            while i>=r1+1 and len(ans)<rows*cols:
+                ans.append(matrix[i][c1])
+                i-=1
             
-        
-        """
-        :type matrix: List[List[int]]
-        :rtype: List[int]
-        """
-        
+            r1+=1
+            r2-=1
+            c1+=1
+            c2-=1
+        return ans
+            
