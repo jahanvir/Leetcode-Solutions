@@ -1,35 +1,19 @@
-class MyHashSet(object):
-
+class MyHashSet:
+        
     def __init__(self):
-        self.hashset=[]
-        
+        self.keys=set()
 
-    def add(self, key):
-        if self.contains(key)==False:
-            self.hashset.append(key)
-        """
-        :type key: int
-        :rtype: None
-        """
-        
+    def add(self, key: int) -> None:
+        self.keys.add(key)
 
-    def remove(self, key):
-        if self.contains(key):
-            i=self.hashset.index(key)
-            self.hashset.pop(i)
-        """
-        :type key: int
-        :rtype: None
-        """
-        
+    def remove(self, key: int) -> None:
+        if key in self.keys:
+            self.keys.remove(key)
 
-    def contains(self, key):
-        return key in self.hashset
-        """
-        :type key: int
-        :rtype: bool
-        """
-        
+    def contains(self, key: int) -> bool:
+        if key in self.keys:
+            return True
+        return False
 
 
 # Your MyHashSet object will be instantiated and called as such:
