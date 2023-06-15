@@ -5,14 +5,12 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:  
-        if root==None:
-            return []
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         ans=[]
+        if not root:
+            return ans
         stack=[root]
-        
         while stack:
-            
             next_level=[]
             val=[]
             for node in stack:
@@ -25,11 +23,3 @@ class Solution:
             stack=next_level
         return ans
             
-                
-        
-        
-            
-            
-        
-    
-        
