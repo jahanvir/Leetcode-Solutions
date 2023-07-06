@@ -1,20 +1,12 @@
-class Solution(object):
-    def minSubArrayLen(self, target, nums):
-        
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        ans=len(nums)+1
         l=0
-        res=len(nums)+1
-        cur=0
-        for r,num in enumerate(nums):
-            cur+=num
-            while cur>=target:
-                res=min(res,r-l+1)
-                cur=cur-nums[l]
-                l=l+1
-        return res<len(nums)+1 and res or 0
-            
-        """
-        :type target: int
-        :type nums: List[int]
-        :rtype: int
-        """
-        
+        preSum=0
+        for r,n in enumerate(nums):
+            preSum+=n
+            while preSum>=target:
+                ans=min(ans,r-l+1)
+                preSum-=nums[l]
+                l+=1
+        return ans if ans!=len(nums)+1 else 0
